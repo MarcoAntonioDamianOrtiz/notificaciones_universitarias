@@ -13,6 +13,7 @@ class HistorialPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Historial de notificaciones')),
+      // Se actualiza automáticamente cuando el gestor notifica cambios.
       body: AnimatedBuilder(
         animation: gestor,
         builder: (context, _) {
@@ -24,6 +25,7 @@ class HistorialPage extends StatelessWidget {
             );
           }
 
+          // Reutiliza el mismo widget de tarjeta que muestra InicioPage.
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [

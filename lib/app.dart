@@ -7,6 +7,7 @@ class NotificacionesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // MaterialApp configura el tema y define InicioPage como pantalla inicial.
     return MaterialApp(
       title: 'UniAvisos',
       debugShowCheckedModeBanner: false,

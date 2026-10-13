@@ -10,13 +10,16 @@ class AvisoWebAdapter implements FuenteNotificacion {
 
   @override
   Notificacion obtenerNotificacion() {
+    // Lee el JSON simulado tal como lo entrega el sistema antiguo.
     final datos = sistemaWeb.obtenerAvisoWeb();
+    // Acepta los nombres asunto o tituloAviso, sin cambiar las pantallas.
     final titulo = (datos['asunto'] ??
             datos['tituloAviso'] ??
             'Aviso sin título')
         .toString();
     final nivel = (datos['nivel'] ?? 'normal').toString().toLowerCase();
 
+    // Construye el objeto con los nombres y tipos que entiende nuestra app.
     return Notificacion(
       id: (datos['id'] ?? 'web-$titulo').toString(),
       titulo: titulo,
@@ -26,6 +29,7 @@ class AvisoWebAdapter implements FuenteNotificacion {
     );
   }
 
+  // Adapta los niveles externos (urgente, bajo...) a alta, media o baja.
   String _convertirPrioridad(String nivel) {
     if (nivel == 'urgente' || nivel == 'alto') {
       return 'alta';

@@ -5,6 +5,7 @@ import 'package:notificaciones_universitarias/modelos/notificacion.dart';
 import 'package:notificaciones_universitarias/singleton/gestor_notificaciones.dart';
 
 void main() {
+  // El Singleton conserva estado; lo limpiamos para aislar cada prueba.
   setUp(() => GestorNotificaciones().limpiar());
 
   test('Singleton devuelve siempre la misma instancia', () {
@@ -45,6 +46,7 @@ void main() {
     expect(gestor.notificaciones.length, 1);
   });
 
+  // Verifica que Adapter cambie nombres de campos y nivele la prioridad.
   test('Adapter traduce el JSON del ejercicio al modelo móvil', () {
     final sistema = SistemaAvisosWeb({
       'asunto': 'Suspensión de clases',

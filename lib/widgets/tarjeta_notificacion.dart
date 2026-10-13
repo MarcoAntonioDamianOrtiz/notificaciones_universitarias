@@ -8,6 +8,7 @@ class TarjetaNotificacion extends StatelessWidget {
 
   const TarjetaNotificacion({super.key, required this.notificacion});
 
+  // Cada tipo (tarea, examen o aviso) recibe un ícono representativo.
   IconData get _icono {
     switch (notificacion.tipo) {
       case 'Tarea':
@@ -19,6 +20,7 @@ class TarjetaNotificacion extends StatelessWidget {
     }
   }
 
+  // El color permite identificar visualmente la prioridad del aviso.
   Color _color(BuildContext context) {
     if (notificacion.prioridad == 'alta') return Colors.deepOrange;
     if (notificacion.prioridad == 'baja') return Colors.teal;
@@ -29,6 +31,7 @@ class TarjetaNotificacion extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = _color(context);
 
+    // Se reutiliza esta tarjeta tanto en Inicio como en Historial.
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       child: Padding(

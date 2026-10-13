@@ -12,9 +12,11 @@ class InicioPage extends StatelessWidget {
   const InicioPage({super.key});
 
   void _registrar(BuildContext context, Notificacion notificacion) {
+    // La pantalla delega el guardado al Singleton, no lleva su propia lista.
     final gestor = GestorNotificaciones();
     final agregado = gestor.agregar(notificacion);
 
+    // Informa si se guardó la notificación o si su id ya estaba registrado.
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -27,6 +29,7 @@ class InicioPage extends StatelessWidget {
     );
   }
 
+  // Tareas y exámenes se crean directamente con el modelo Notificacion.
   void _registrarTarea(BuildContext context) {
     _registrar(
       context,
@@ -62,6 +65,7 @@ class InicioPage extends StatelessWidget {
       'nivel': 'urgente',
     };
 
+    // Adapter transforma el Map externo antes de enviarlo al Singleton.
     final sistemaWeb = SistemaAvisosWeb(avisoWeb);
     final FuenteNotificacion adaptador = AvisoWebAdapter(sistemaWeb);
     final avisoMovil = adaptador.obtenerNotificacion();
@@ -82,6 +86,7 @@ class InicioPage extends StatelessWidget {
             key: const Key('btnHistorial'),
             tooltip: 'Ver historial',
             onPressed: () {
+              // Navega al historial sin crear otro gestor de notificaciones.
               Navigator.of(context).push(
                 MaterialPageRoute<void>(
                   builder: (_) => const HistorialPage(),
@@ -92,9 +97,11 @@ class InicioPage extends StatelessWidget {
           ),
         ],
       ),
+      // Escucha notifyListeners() del Singleton y reconstruye los datos visibles.
       body: AnimatedBuilder(
         animation: gestor,
         builder: (context, _) {
+          // En Inicio se muestran como máximo los tres registros más recientes.
           final recientes = gestor.notificaciones.take(3).toList();
 
           return ListView(

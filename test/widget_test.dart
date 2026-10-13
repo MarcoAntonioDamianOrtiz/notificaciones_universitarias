@@ -8,6 +8,7 @@ void main() {
 
     await tester.pumpWidget(const NotificacionesApp());
 
+    // Confirma que Flutter construyó la pantalla con sus textos principales.
     expect(find.text('UniAvisos'), findsOneWidget);
     expect(find.text('Simular acontecimientos'), findsOneWidget);
   });

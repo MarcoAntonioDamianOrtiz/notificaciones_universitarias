@@ -6,6 +6,7 @@ import 'package:notificaciones_universitarias/singleton/gestor_notificaciones.da
 void main() {
   setUp(() => GestorNotificaciones().limpiar());
 
+  // Simula un clic real y comprueba el flujo Adapter -> Singleton -> Historial.
   testWidgets('El aviso adaptado aparece también en el historial', (tester) async {
     await tester.pumpWidget(const NotificacionesApp());
 
@@ -20,6 +21,7 @@ void main() {
     expect(GestorNotificaciones().notificaciones.first.titulo,
         'Suspensión de clases');
 
+    // Cambiamos de pantalla para verificar que comparte el mismo registro.
     await tester.tap(find.byKey(const Key('btnHistorial')));
     await tester.pumpAndSettle();
 
@@ -27,3 +29,4 @@ void main() {
     expect(find.text('Suspensión de clases'), findsOneWidget);
   });
 }
+

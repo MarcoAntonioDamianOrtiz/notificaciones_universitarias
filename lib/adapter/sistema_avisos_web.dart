@@ -5,6 +5,7 @@ class SistemaAvisosWeb {
 
   SistemaAvisosWeb(this.avisoWeb);
 
+  // Devuelve el Map original; no conoce el modelo utilizado por Flutter.
   Map<String, dynamic> obtenerAvisoWeb() {
     return avisoWeb;
   }
